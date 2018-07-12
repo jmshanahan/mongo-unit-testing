@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  name: { type: String }
+  name: { type: String },
+  postCount: { type: Number }
 });
 const User = mongoose.model("user", UserSchema);
 
