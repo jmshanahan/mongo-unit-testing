@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "NODE_PATH=./src nodemon --exec 'mocha -R min'",
+    "test": "NODE_PATH=./src nodemon --exec 'mocha -R list'",
     "testlist": "NODE_PATH=./src mocha -R list"
   },
   "dependencies": {

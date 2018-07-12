@@ -1,9 +1,9 @@
 const assert = require("assert");
-const { expect } = require("chai");
 const { assert: chaiAssert } = require("chai");
+
 const User = require("user");
 
-describe("Deleting a record", () => {
+describe("Deleting a record::", () => {
   let joe;
   beforeEach(done => {
     joe = new User({ name: "Joe" });
@@ -44,7 +44,7 @@ describe("Deleting a record", () => {
       })
       .catch(err => done(err));
   });
-  it.only("class method findByIdAndRemove", done => {
+  it("class method findByIdAndRemove", done => {
     User.findByIdAndRemove(joe._id)
       .then(() => User.findByIdAndRemove(joe._id))
       .then(user => {

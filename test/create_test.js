@@ -2,7 +2,7 @@ const assert = require("assert");
 const { expect } = require("chai");
 const User = require("user");
 
-describe("Creating records", () => {
+describe("Creating records::", () => {
   it("saves a user", done => {
     // Saves a user
     const joe = new User({ name: "Joe" });

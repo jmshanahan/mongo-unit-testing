@@ -2,7 +2,7 @@ const assert = require("assert");
 const { expect } = require("chai");
 
 const User = require("user");
-describe("Reading users out of the database", () => {
+describe("Reading users out of the database::", () => {
   let joe;
   beforeEach(done => {
     joe = new User({ name: "joe" });
