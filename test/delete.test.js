@@ -10,8 +10,7 @@ describe("Deleting a record", () => {
     joe.save().then(() => done());
   });
 
-  it.only("removes a record using a model instance", done => {
-    // Saves a user
+  it("removes a record using a model instance", done => {
     joe
       .remove()
       .then(() => User.findOne({ name: "Joe" }))
@@ -24,5 +23,35 @@ describe("Deleting a record", () => {
         chaiAssert.fail(null, null, err);
         done(err);
       });
+  });
+  it("class method remove", done => {
+    User.remove({ name: "Joe" })
+      .then(() => User.findOne({ name: "Joe" }))
+      .then(user => {
+        // assert(user === null);
+        chaiAssert.isNull(user, "Removed user is still in database");
+        done();
+      })
+      .catch(err => done(err));
+  });
+  it("class method findOneAndRemove", done => {
+    User.findOneAndRemove({ name: "Joe" })
+      .then(() => User.findOne({ name: "Joe" }))
+      .then(user => {
+        // assert(user === null);
+        chaiAssert.isNull(user, "Removed user is still in database");
+        done();
+      })
+      .catch(err => done(err));
+  });
+  it.only("class method findByIdAndRemove", done => {
+    User.findByIdAndRemove(joe._id)
+      .then(() => User.findByIdAndRemove(joe._id))
+      .then(user => {
+        // assert(user === null);
+        chaiAssert.isNull(user, "Removed user is still in database");
+        done();
+      })
+      .catch(err => done(err));
   });
 });
