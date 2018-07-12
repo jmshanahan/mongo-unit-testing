@@ -10,8 +10,11 @@ const UserSchema = new Schema({
       message: "Name must be longer than 2 charcters."
     }
   },
-  postCount: { type: Number },
-  posts: [PostSchema]
+  posts: [PostSchema],
+  likes: { type: Number }
+});
+UserSchema.virtual("postCount").get(function() {
+  return this.posts.length;
 });
 const User = mongoose.model("user", UserSchema);
 
