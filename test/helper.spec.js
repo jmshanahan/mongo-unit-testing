@@ -13,16 +13,14 @@ before(done => {
     .catch(err => console.log(err));
 });
 beforeEach(done => {
-  mongoose.connection.collections["users"].drop(() => {
-    done();
+  //Careful mongoose normalizes these blogPosts goes to blogposts
+  const { users, comments, blogposts } = mongoose.connection.collections;
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop(() => {
+        // Ready to run the next test
+        done();
+      });
+    });
   });
-  //   // const { users, comments, blogposts } = mongoose.connection.collections;
-  //   // users.drop(() => {
-  //   //   comments.drop(() => {
-  //   //     blogposts.drop(() => {
-  //   //       // Ready to run the next test
-  //   //       done();
-  //   //     });
-  //   //   });
-  //   // });
 });
