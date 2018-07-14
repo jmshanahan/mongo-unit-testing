@@ -3,10 +3,15 @@ const { expect } = require("chai");
 
 const User = require("user");
 describe("Reading users out of the database::", () => {
-  let joe;
+  let joe, maria, alex, zach;
   beforeEach(done => {
+    alex = new User({ name: "alex" });
+    maria = new User({ name: "maria" });
     joe = new User({ name: "joe" });
-    joe.save().then(() => done());
+    zach = new User({ name: "zach" });
+    Promise.all([joe.save(), maria.save(), alex.save(), zach.save()]).then(() =>
+      done()
+    );
   });
 
   it("should find all users with a name of joe", done => {
@@ -27,5 +32,18 @@ describe("Reading users out of the database::", () => {
     // expect(user.name).to.equal("joe");
     // done();
     // });
+  });
+  it.only("Can skip and limit the results set", done => {
+    const collation = { locale: "en", strength: 2 };
+    User.find({})
+      .sort({ name: 1 })
+      .skip(1)
+      .limit(2)
+      .then(users => {
+        expect(users.length).to.equal(2);
+        expect(users[0].name).to.equal("joe");
+        expect(users[1].name).to.equal("maria");
+        done();
+      });
   });
 });
